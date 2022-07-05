@@ -8,13 +8,9 @@ public interface ApiServiceMeeting {
 
     public List<Meeting> getMeetings();
 
-    public Meeting createNewMeeting();
+    public int generateId();
 
-    public void saveMeeting(Meeting meeting);
-
-    public Meeting getSavedMeeting();
-
-    public void addMeeting();
+    public void addMeeting(Meeting meeting);
 
     public Meeting getMeeting(int Id);
 

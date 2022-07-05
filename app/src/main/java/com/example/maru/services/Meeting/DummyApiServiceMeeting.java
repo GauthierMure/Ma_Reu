@@ -1,5 +1,7 @@
 package com.example.maru.services.Meeting;
 
+import android.util.Log;
+
 import com.example.maru.Model.Meeting;
 
 import java.util.List;
@@ -7,7 +9,6 @@ import java.util.List;
 public class DummyApiServiceMeeting implements ApiServiceMeeting {
 
     private List<Meeting> mMeetings = DummyMeetingGenerator.generateMeetings();
-    private Meeting tempMeeting;
 
     @Override
     public List<Meeting> getMeetings() {
@@ -15,24 +16,14 @@ public class DummyApiServiceMeeting implements ApiServiceMeeting {
     }
 
     @Override
-    public Meeting createNewMeeting() {
-        tempMeeting = new Meeting(mMeetings.size());
-        return tempMeeting;
+    public int generateId() {
+        return mMeetings.get(mMeetings.size()-1).getmId() + 1;
     }
 
     @Override
-    public void saveMeeting(Meeting meeting) {
-        tempMeeting = meeting;
-    }
-
-    @Override
-    public Meeting getSavedMeeting(){
-        return tempMeeting;
-    }
-
-    @Override
-    public void addMeeting() {
-        mMeetings.add(tempMeeting);
+    public void addMeeting(Meeting meeting) {
+        mMeetings.add(meeting);
+        Log.i("meetingList", "size = "+mMeetings.size());
     }
 
     @Override

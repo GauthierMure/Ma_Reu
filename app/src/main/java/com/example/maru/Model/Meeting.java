@@ -11,19 +11,20 @@ public class Meeting {
     private String mTitle;
     private String mCreator;
     private String mColor;
-    private String mDate;
-    private String mRoom, mTopic;
+    private Calendar mDate;
+    private MeetingRoom mRoom;
+    private String mTopic;
     private List<String> mParticipants;
 
     public Meeting (int id){
-
+        this.mId = id;
     }
 
-    public Meeting(int Id, String title, String creator, String color, String Date, String Room, String Topic, List<String> Participants) {
+    public Meeting(int Id, String title, String creator, Calendar Date, MeetingRoom Room, String Topic, List<String> Participants) {
         this.mId = Id;
         this.mTitle = title;
         this.mCreator = creator;
-        this.mColor = color;
+        this.mColor = Room.getColor();
         this.mDate = Date;
         this.mRoom = Room;
         this.mTopic = Topic;
@@ -62,19 +63,19 @@ public class Meeting {
         this.mColor = mColor;
     }
 
-    public String getDate() {
+    public Calendar getDate() {
         return mDate;
     }
 
-    public void setDate(String mDate) {
+    public void setDate(Calendar mDate) {
         this.mDate = mDate;
     }
 
-    public String getRoom() {
+    public MeetingRoom getRoom() {
         return mRoom;
     }
 
-    public void setRoom(String mRoom) {
+    public void setRoom(MeetingRoom mRoom) {
         this.mRoom = mRoom;
     }
 

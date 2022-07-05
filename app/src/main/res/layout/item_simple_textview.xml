@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".View.Activity.MeetingInfoActivity">
+    android:layout_height="wrap_content">
 
-    <FrameLayout
-        android:id="@+id/meetingInfoFragmentContainer"
+    <TextView
+        android:id="@+id/simpleTv"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:paddingStart="5dp"
+        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </FrameLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

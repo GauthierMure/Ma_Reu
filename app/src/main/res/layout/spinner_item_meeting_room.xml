@@ -6,7 +6,7 @@
     android:layout_height="50dp">
 
     <TextView
-        android:id="@+id/roomColorTV"
+        android:id="@+id/roomColorTv"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
@@ -31,7 +31,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/roomCapacityTv"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/roomColorTV"
+        app:layout_constraintStart_toEndOf="@+id/roomColorTv"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

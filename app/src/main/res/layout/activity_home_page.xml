@@ -7,8 +7,8 @@
     tools:context=".View.Activity.HomePageActivity">
 
     <include
-        android:id="@+id/include"
-        layout="@layout/home_page_action_bar"
+        android:id="@+id/meetingInfoActionBar"
+        layout="@layout/action_bar_home_page"
         app:layout_constraintBottom_toTopOf="@+id/rvListMeeting"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -24,7 +24,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include">
+        app:layout_constraintTop_toBottomOf="@+id/meetingInfoActionBar">
 
     </androidx.recyclerview.widget.RecyclerView>
 

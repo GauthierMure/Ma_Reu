@@ -3,6 +3,7 @@ package com.example.maru.ViewModel;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,14 +21,16 @@ import com.example.maru.R;
 import com.example.maru.View.Activity.MeetingInfoActivity;
 import com.example.maru.services.Meeting.ApiServiceMeeting;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<MeetingListRecyclerViewAdapter.ViewHolder> {
 
-    private ApiServiceMeeting mApiserviceMeeting = DI.getMeetingApiService();
-    private List<Meeting> mMeetings = mApiserviceMeeting.getMeetings();
+    private final ApiServiceMeeting mApiserviceMeeting = DI.getMeetingApiService();
+    private List<Meeting> mMeetings;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
+        private int id;
         private final ImageButton deleteBtn;
         private final TextView titleTv, participantsTv;
         private final TextView colorTv;
@@ -36,12 +39,21 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
             super(itemView);
             itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(itemView.getContext(), MeetingInfoActivity.class);
+                intent.putExtra("id",id);
                 itemView.getContext().startActivity(intent);
             });
             deleteBtn = itemView.findViewById(R.id.btnDeleteItem);
             titleTv = itemView.findViewById(R.id.tvInfoMeeting);
             participantsTv = itemView.findViewById(R.id.tvListParticipants);
             colorTv = itemView.findViewById(R.id.ivColorMeeting);
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
         }
 
         public ImageButton getDeleteBtn() {
@@ -68,6 +80,14 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
         }
     }
 
+    public MeetingListRecyclerViewAdapter(){
+         mMeetings = mApiserviceMeeting.getMeetings();
+    }
+
+    public MeetingListRecyclerViewAdapter(List<Meeting> meeting){
+        mMeetings = meeting;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -77,8 +97,10 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
 
     @Override
     public void onBindViewHolder(@NonNull MeetingListRecyclerViewAdapter.ViewHolder holder, int position) {
+        holder.setId(mMeetings.get(position).getmId());
         holder.setColor(mMeetings.get(position).getColor());
-        String title = mMeetings.get(position).getTitle()+" - "+mMeetings.get(position).getDate()+" - "+mMeetings.get(position).getCreator();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH'h'mm");
+        String title = mMeetings.get(position).getTitle()+" - "+format.format(mMeetings.get(position).getDate().getTime())+" - "+mMeetings.get(position).getCreator();
         holder.getTitleTv().setText(title);
         String participants = "";
         for(int i = 0;i<mMeetings.get(position).getParticipants().size();i++){
@@ -98,5 +120,9 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
     @Override
     public int getItemCount() {
         return mMeetings.size();
+    }
+
+    public List<Meeting> getMeetings(){
+        return mMeetings;
     }
 }

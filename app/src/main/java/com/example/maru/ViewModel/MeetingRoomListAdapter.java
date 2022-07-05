@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -48,9 +47,9 @@ public class MeetingRoomListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
-        view = inflater.inflate(R.layout.meeting_room_spinner_item,null);
+        view = inflater.inflate(R.layout.spinner_item_meeting_room,null);
 
-        TextView colorTv = view.findViewById(R.id.roomColorTV);
+        TextView colorTv = view.findViewById(R.id.roomColorTv);
         TextView nameTv = view.findViewById(R.id.roomNameTv);
         TextView capacityTv = view.findViewById(R.id.roomCapacityTv);
 

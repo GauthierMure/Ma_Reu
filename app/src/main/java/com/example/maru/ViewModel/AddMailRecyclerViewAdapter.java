@@ -25,7 +25,7 @@ public class AddMailRecyclerViewAdapter extends RecyclerView.Adapter<AddMailRecy
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.add_mail_item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_add_mail,parent,false);
         return new viewHolder(view);
     }
 
@@ -50,6 +50,15 @@ public class AddMailRecyclerViewAdapter extends RecyclerView.Adapter<AddMailRecy
 
     public void setListMaxSize(int size){
         this.listMaxSize = size;
+    }
+
+    public List<String> getListMails(){
+        return mails;
+    }
+
+    public void addMail(String mail){
+        mails.add(mail);
+        notifyItemInserted(getItemCount());
     }
 
     public static class viewHolder extends RecyclerView.ViewHolder {
