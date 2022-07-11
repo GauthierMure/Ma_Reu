@@ -25,11 +25,11 @@ import java.util.List;
 
 public class customDialogFragment extends DialogFragment {
 
-    public interface OnDataPass{
-        public void onDataPass(MeetingRoom room);
+    public interface OnRoomPass {
+        public void onRoomPass(MeetingRoom room);
     }
 
-    private OnDataPass dataPasser;
+    private OnRoomPass roomPasser;
 
     private final List<MeetingRoom> mRooms;
 
@@ -41,6 +41,10 @@ public class customDialogFragment extends DialogFragment {
 
     public customDialogFragment(List<MeetingRoom> meetingRooms){
         mRooms = meetingRooms;
+    }
+
+    public void setRoomPasser(customDialogFragment.OnRoomPass dataPasser){
+        this.roomPasser = dataPasser;
     }
 
     public static customDialogFragment newInstance(List<MeetingRoom> meetingRooms){
@@ -76,18 +80,12 @@ public class customDialogFragment extends DialogFragment {
         mListRv.setAdapter(new meetingRoomRecyclerViewAdapter(mRooms, this::selectRoom));
     }
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        dataPasser = (OnDataPass) context;
-    }
-
     private void selectRoom(MeetingRoom room) {
         mRoom = room;
     }
 
     private void selectFilter() {
-        dataPasser.onDataPass(mRoom);
+        roomPasser.onRoomPass(mRoom);
         dismiss();
     }
 }

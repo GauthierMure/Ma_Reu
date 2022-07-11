@@ -5,173 +5,325 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardView"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_margin="10dp"
-        android:layout_marginTop="30dp"
-        android:outlineProvider="none"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="#E9E9E9"
-        app:strokeWidth="1dp">
-
-        <EditText
-            android:id="@+id/meetingNameEt"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ems="10"
-            android:hint="@string/meeting_name"
-            android:inputType="textPersonName"
-            android:selectAllOnFocus="false"
-            android:singleLine="false" />
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:outlineProvider="none"
-        app:cardCornerRadius="10dp"
+    <include
+        android:id="@+id/addMeetingActionBar"
+        layout="@layout/action_bar_add_meeting"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:strokeColor="#E9E9E9"
-        app:strokeWidth="1dp">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/creatorNameEt"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ems="10"
-            android:hint="@string/creator"
-            android:inputType="textPersonName"
-            android:selectAllOnFocus="false"
-            android:singleLine="false" />
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardView1"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_margin="10dp"
-        android:outlineProvider="none"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView"
-        app:strokeColor="#E9E9E9"
-        app:strokeWidth="1dp">
-
-        <Spinner
-            android:id="@+id/meetingRoomSelectorSp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/select_the_meeting_room" />
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardView2"
-        android:layout_width="0dp"
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="10dp"
-        android:outlineProvider="none"
-        app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toTopOf="@+id/createMeetingBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView1"
-        app:strokeColor="#E9E9E9"
-        app:strokeWidth="1dp">
+        app:layout_constraintTop_toBottomOf="@+id/addMeetingActionBar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toTopOf="@+id/addMailCv"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/mailsRv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                    </androidx.recyclerview.widget.RecyclerView>
-                </LinearLayout>
-            </ScrollView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/addMailCv"
-                android:layout_width="match_parent"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardView2"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:outlineProvider="none"
+                app:cardCornerRadius="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="#707070"
+                app:strokeWidth="1dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
                     <EditText
-                        android:id="@+id/addMailEt"
-                        android:layout_width="0dp"
+                        android:id="@+id/addMeetingMeetingNameEt"
+                        style="@style/Widget.AppCompat.EditText"
+                        android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:hint="Add new e-Mail"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/textView4"
+                        android:background="@drawable/imput_text_style"
+                        android:ems="10"
+                        android:hint="@string/meeting_name"
+                        android:inputType="textPersonName"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10sp"
+                        android:selectAllOnFocus="false"
+                        android:singleLine="false"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="1dp"
-                        android:layout_height="45dp"
+                        android:id="@+id/textView7"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
                         android:background="#707070"
-                        android:text="TextView"
-                        app:layout_constraintBottom_toBottomOf="@+id/addMailEt"
-                        app:layout_constraintEnd_toStartOf="@+id/addMailIBtn"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/addMailEt"
-                        app:layout_constraintTop_toTopOf="@+id/addMailEt" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/addMeetingMeetingNameEt" />
+
+                    <TextView
+                        android:id="@+id/textView24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="24dp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/ic_people_gris"
+                        app:layout_constraintBottom_toTopOf="@+id/textView11"
+                        app:layout_constraintEnd_toEndOf="@+id/textView21"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="@+id/textView21"
+                        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+                    <EditText
+                        android:id="@+id/addMeetingCreatorNameEt"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/imput_text_style"
+                        android:ems="10"
+                        android:hint="@string/creator"
+                        android:inputType="textPersonName"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:selectAllOnFocus="false"
+                        android:singleLine="false"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="@+id/textView23"
+                        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="#707070"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/addMeetingCreatorNameEt" />
+
+                    <TextView
+                        android:id="@+id/textView21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_marginTop="23dp"
+                        android:background="@drawable/ic_horloge_gris"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView23"
+                        app:layout_constraintEnd_toStartOf="@+id/textView23"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/textView23" />
+
+                    <TextView
+                        android:id="@+id/textView23"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:text="@string/full_day"
+                        app:layout_constraintEnd_toStartOf="@+id/addMeetingIsFullDaySw"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/textView21"
+                        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+                    <Switch
+                        android:id="@+id/addMeetingIsFullDaySw"
+                        android:layout_width="50dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView23"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/textView23"
+                        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+                    <TextView
+                        android:id="@+id/addMeetingBeginingDateTv"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/imput_text_style"
+                        android:gravity="center_vertical"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        app:layout_constraintEnd_toStartOf="@+id/addMeetingBeginingDateBtn"
+                        app:layout_constraintStart_toStartOf="@+id/textView23"
+                        app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
                     <ImageButton
-                        android:id="@+id/addMailIBtn"
+                        android:id="@+id/addMeetingBeginingDateBtn"
                         android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_height="0dp"
                         android:background="#00FFFFFF"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintBottom_toTopOf="@+id/addMeetingEndingDateTv"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/addMeetingBeginingDateTv"
+                        app:srcCompat="@drawable/ic_calendar_gris" />
+
+                    <TextView
+                        android:id="@+id/textView22"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="#707070"
+                        app:layout_constraintEnd_toEndOf="@+id/addMeetingBeginingDateBtn"
+                        app:layout_constraintStart_toStartOf="@+id/addMeetingBeginingDateTv"
+                        app:layout_constraintTop_toBottomOf="@+id/addMeetingBeginingDateTv" />
+
+                    <TextView
+                        android:id="@+id/addMeetingEndingDateTv"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/imput_text_style"
+                        android:gravity="center_vertical"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        app:layout_constraintEnd_toStartOf="@+id/addMeetingEndingDateBtn"
+                        app:layout_constraintStart_toStartOf="@+id/addMeetingBeginingDateTv"
+                        app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+                    <ImageButton
+                        android:id="@+id/addMeetingEndingDateBtn"
+                        android:layout_width="50dp"
+                        android:layout_height="0dp"
+                        android:background="#00FFFFFF"
+                        app:layout_constraintBottom_toBottomOf="@+id/addMeetingEndingDateTv"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/addMeetingEndingDateTv"
+                        app:srcCompat="@drawable/ic_calendar_gris" />
+
+                    <TextView
+                        android:id="@+id/textView14"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="#707070"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/addMeetingEndingDateTv" />
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_place_location_gris"
+                        app:layout_constraintBottom_toBottomOf="@+id/addMeetingMeetingRoomSelectorSp"
+                        app:layout_constraintEnd_toStartOf="@+id/addMeetingMeetingRoomSelectorSp"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/addMeetingMeetingRoomSelectorSp" />
+
+                    <Spinner
+                        android:id="@+id/addMeetingMeetingRoomSelectorSp"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:contentDescription="@string/select_the_meeting_room"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@+id/textView4"
-                        app:layout_constraintTop_toTopOf="@+id/addMailEt"
+                        app:layout_constraintStart_toStartOf="@+id/addMeetingEndingDateTv"
+                        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="#707070"
+                        app:layout_constraintBottom_toTopOf="@+id/addMeetingAddMailEt"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/addMeetingMeetingRoomSelectorSp" />
+
+                    <TextView
+                        android:id="@+id/textView25"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/ic_group_of_people_gris"
+                        app:layout_constraintBottom_toBottomOf="@+id/addMeetingAddMailEt"
+                        app:layout_constraintEnd_toStartOf="@+id/addMeetingAddMailEt"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/addMeetingAddMailEt" />
+
+                    <EditText
+                        android:id="@+id/addMeetingAddMailEt"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/imput_text_style"
+                        android:hint="@string/add_new_e_mail"
+                        android:inputType="textEmailAddress"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        app:layout_constraintEnd_toStartOf="@+id/addMeetingAddMailIBtn"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/textView25"
+                        app:layout_constraintStart_toStartOf="@+id/addMeetingMeetingRoomSelectorSp"
+                        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+                    <ImageButton
+                        android:id="@+id/addMeetingAddMailIBtn"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="#00FFFFFF"
+                        app:layout_constraintBottom_toBottomOf="@+id/addMeetingAddMailEt"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/addMeetingAddMailEt"
+                        app:layout_constraintTop_toTopOf="@+id/addMeetingAddMailEt"
                         app:srcCompat="@drawable/ic_logo_ajouter_gris" />
+
+                    <TextView
+                        android:id="@+id/textView26"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="#707070"
+                        app:layout_constraintEnd_toEndOf="@+id/addMeetingAddMailIBtn"
+                        app:layout_constraintStart_toStartOf="@+id/addMeetingAddMailEt"
+                        app:layout_constraintTop_toBottomOf="@+id/addMeetingAddMailEt" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/addMeetingMailsRv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        app:layout_constrainedHeight="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/addMeetingAddMailIBtn"
+                        app:layout_constraintHeight_max="150dp"
+                        app:layout_constraintStart_toStartOf="@+id/addMeetingAddMailEt"
+                        app:layout_constraintTop_toBottomOf="@+id/textView26">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.cardview.widget.CardView>
 
+            </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </com.google.android.material.card.MaterialCardView>
+    </ScrollView>
 
     <Button
         android:id="@+id/createMeetingBtn"
@@ -182,6 +334,8 @@
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

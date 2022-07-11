@@ -1,7 +1,5 @@
 package com.example.maru.Model;
 
-import android.graphics.Color;
-
 import java.util.Calendar;
 import java.util.List;
 
@@ -11,10 +9,12 @@ public class Meeting {
     private String mTitle;
     private String mCreator;
     private String mColor;
-    private Calendar mDate;
+    private Calendar mBeginingDate;
+    private Calendar mEndingDate;
     private MeetingRoom mRoom;
     private String mTopic;
     private List<String> mParticipants;
+    private boolean isFullDay;
 
     public Meeting (int id){
         this.mId = id;
@@ -22,10 +22,12 @@ public class Meeting {
 
     public Meeting(int Id, String title, String creator, Calendar Date, MeetingRoom Room, String Topic, List<String> Participants) {
         this.mId = Id;
+        this.isFullDay = true;
         this.mTitle = title;
         this.mCreator = creator;
         this.mColor = Room.getColor();
-        this.mDate = Date;
+        this.mBeginingDate = Date;
+        this.mEndingDate = Date;
         this.mRoom = Room;
         this.mTopic = Topic;
         this.mParticipants = Participants;
@@ -63,12 +65,20 @@ public class Meeting {
         this.mColor = mColor;
     }
 
-    public Calendar getDate() {
-        return mDate;
+    public Calendar getBeginingDate() {
+        return mBeginingDate;
     }
 
-    public void setDate(Calendar mDate) {
-        this.mDate = mDate;
+    public void setBeginingDate(Calendar mDate) {
+        this.mBeginingDate = mDate;
+    }
+
+    public Calendar getEndingDate() {
+        return mEndingDate;
+    }
+
+    public void setEndingDate(Calendar mEndingDate) {
+        this.mEndingDate = mEndingDate;
     }
 
     public MeetingRoom getRoom() {
@@ -93,5 +103,13 @@ public class Meeting {
 
     public void setParticipants(List<String> mParticipants) {
         this.mParticipants = mParticipants;
+    }
+
+    public boolean isFullDay() {
+        return isFullDay;
+    }
+
+    public void setFullDay(boolean fullDay) {
+        isFullDay = fullDay;
     }
 }

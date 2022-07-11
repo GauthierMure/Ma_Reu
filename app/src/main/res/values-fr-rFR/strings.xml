@@ -4,7 +4,17 @@
     <string name="add_meeting" translatable="false">Créer une réunion</string>
     <string name="meeting_name">Nom de la réunion</string>
     <string name="select_the_meeting_room">selectionnez la sale de réunion</string>
-    <string name="email_address">Adresse Email</string>
+    <string name="email_address">Adresse e-Mail</string>
     <string name="creator">Créateur</string>
-    <string name="create">Create</string>
+    <string name="create">Créer</string>
+    <string name="select_place">selectionnez un lieu</string>
+    <string name="select">Selectionner</string>
+    <string name="add_new_e_mail">ajouter un nouvel e-Mail</string>
+    <string name="full_day">journée entière</string>
+    <string name="ending">Fin</string>
+    <string name="begining">Début</string>
+    <string name="floor">Etage</string>
+    <string name="capacity">Capacité maximum</string>
+    <string name="participant">Participants</string>
+    <string name="next">Suivant</string>
 </resources>

@@ -5,14 +5,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageButton;
 
-import com.example.maru.DI.DI;
-import com.example.maru.Model.Meeting;
 import com.example.maru.R;
-import com.example.maru.View.Fragment.DateSelectorFragment;
 import com.example.maru.View.Fragment.MeetingInfoFragment;
-import com.example.maru.services.Meeting.ApiServiceMeeting;
 
 public class MeetingInfoActivity extends AppCompatActivity {
 

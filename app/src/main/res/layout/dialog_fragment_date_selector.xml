@@ -23,35 +23,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/dateFilterTitle"
-                android:layout_width="0dp"
-                android:layout_height="35dp"
-                android:background="@color/purple_700"
-                android:gravity="bottom"
-                android:paddingStart="10dp"
-                android:text="Select a date"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@+id/dateFilterTypeSw"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/dateFilterTypeSw"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:background="@color/purple_700"
-                android:text="periode"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="@+id/dateFilterTitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/dateFilterTitle"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <DatePicker
                 android:id="@+id/datefilterPicker"
                 android:layout_width="wrap_content"
@@ -61,7 +32,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dateFilterTitle" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/selectDateFilterBtn"
@@ -69,7 +40,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/purple_700"
-                android:text="Select"
+                android:text="@string/select"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

@@ -3,7 +3,6 @@ package com.example.maru.ViewModel;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +12,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.maru.DI.DI;
 import com.example.maru.Model.Meeting;
 import com.example.maru.R;
+import com.example.maru.View.Activity.HomePageActivity;
 import com.example.maru.View.Activity.MeetingInfoActivity;
+import com.example.maru.View.Fragment.MeetingInfoFragment;
 import com.example.maru.services.Meeting.ApiServiceMeeting;
 
 import java.text.SimpleDateFormat;
@@ -28,6 +30,7 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
 
     private final ApiServiceMeeting mApiserviceMeeting = DI.getMeetingApiService();
     private List<Meeting> mMeetings;
+    private static HomePageActivity mActivity;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         private int id;
@@ -35,12 +38,18 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
         private final TextView titleTv, participantsTv;
         private final TextView colorTv;
 
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(v -> {
-                Intent intent = new Intent(itemView.getContext(), MeetingInfoActivity.class);
-                intent.putExtra("id",id);
-                itemView.getContext().startActivity(intent);
+                FragmentManager fm = mActivity.getSupportFragmentManager();
+                MeetingInfoFragment frag = MeetingInfoFragment.newInstance(id);
+                int Tag;
+                if (mActivity.getResources().getBoolean(R.bool.isTablet))
+                    Tag = HomePageActivity.TAG_OTHER_FRAGMENT;
+                else
+                    Tag = HomePageActivity.TAG_LIST_FRAGMENT;
+                HomePageActivity.setFragment(fm,frag,Tag);
             });
             deleteBtn = itemView.findViewById(R.id.btnDeleteItem);
             titleTv = itemView.findViewById(R.id.tvInfoMeeting);
@@ -80,11 +89,13 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
         }
     }
 
-    public MeetingListRecyclerViewAdapter(){
-         mMeetings = mApiserviceMeeting.getMeetings();
+    public MeetingListRecyclerViewAdapter(HomePageActivity activity){
+        mActivity = activity;
+        mMeetings = mApiserviceMeeting.getMeetings();
     }
 
-    public MeetingListRecyclerViewAdapter(List<Meeting> meeting){
+    public MeetingListRecyclerViewAdapter(HomePageActivity activity, List<Meeting> meeting){
+        mActivity = activity;
         mMeetings = meeting;
     }
 
@@ -100,7 +111,7 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
         holder.setId(mMeetings.get(position).getmId());
         holder.setColor(mMeetings.get(position).getColor());
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH'h'mm");
-        String title = mMeetings.get(position).getTitle()+" - "+format.format(mMeetings.get(position).getDate().getTime())+" - "+mMeetings.get(position).getCreator();
+        String title = mMeetings.get(position).getTitle()+" - "+format.format(mMeetings.get(position).getBeginingDate().getTime())+" - "+mMeetings.get(position).getCreator();
         holder.getTitleTv().setText(title);
         String participants = "";
         for(int i = 0;i<mMeetings.get(position).getParticipants().size();i++){

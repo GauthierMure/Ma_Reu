@@ -1,14 +1,13 @@
 package com.example.maru.View.Fragment;
 
-import android.app.ActionBar;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +23,7 @@ import android.widget.TextView;
 import com.example.maru.DI.DI;
 import com.example.maru.Model.Meeting;
 import com.example.maru.R;
+import com.example.maru.View.Activity.HomePageActivity;
 import com.example.maru.ViewModel.MailListAdapter;
 import com.example.maru.services.Meeting.ApiServiceMeeting;
 import com.google.android.material.card.MaterialCardView;
@@ -66,7 +66,6 @@ public class MeetingInfoFragment extends Fragment {
         if (arg != null){
             int id  = arg.getInt("id",0);
             mMeeting = api.getMeeting(id);
-            Log.i("meeting",mMeeting.getTitle());
         }else
             mMeeting = api.getMeeting(1);
     }
@@ -99,11 +98,17 @@ public class MeetingInfoFragment extends Fragment {
     }
 
     private void init() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH'h'mm");
+        SimpleDateFormat dateFormat;
         mFragmentTitleTv.setText("Meeting Informations");
         mMeetingTitleTv.setText(mMeeting.getTitle());
-        mMeetingBeginingTv.setText(dateFormat.format(mMeeting.getDate().getTime()));
-        mMeetingEndingTv.setText("pas encore impléenté");
+        mFullDayRBtn.setChecked(mMeeting.isFullDay());
+        if (mMeeting.isFullDay()){
+            dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        }else{
+            dateFormat = new SimpleDateFormat("dd/MM/yyyy HH'h'mm");
+        }
+        mMeetingBeginingTv.setText(dateFormat.format(mMeeting.getBeginingDate().getTime()));
+        mMeetingEndingTv.setText(dateFormat.format(mMeeting.getEndingDate().getTime()));
         mRoomNameTv.setText(mMeeting.getRoom().getName());
         mRoomFloorTv.setText(String.valueOf(mMeeting.getRoom().getFloor()));
         mRoomCapacityTv.setText(String.valueOf(mMeeting.getRoom().getCapacity()));
@@ -122,7 +127,13 @@ public class MeetingInfoFragment extends Fragment {
         for (int i = 0; i < mMeeting.getParticipants().size(); i++){
             Log.i("Participants", mMeeting.getParticipants().get(i));
         }
+        if (!getActivity().getResources().getBoolean(R.bool.isTablet))
+            mReturnBtn.setOnClickListener(v -> {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                ListMeetingFragment frag = ListMeetingFragment.newInstance();
+                int Tag = HomePageActivity.TAG_LIST_FRAGMENT;
+                HomePageActivity.setFragment(fm,frag,Tag);
+            });
 
-        mReturnBtn.setOnClickListener(v -> getActivity().finish());
     }
 }

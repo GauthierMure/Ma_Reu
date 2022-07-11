@@ -17,10 +17,6 @@
             android:name=".View.Activity.MeetingInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".View.Activity.AddMeetingActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustPan"/>
-        <activity
             android:name=".View.Activity.HomePageActivity"
             android:exported="true">
             <intent-filter>

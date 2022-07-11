@@ -1,6 +1,5 @@
 package com.example.maru.View.Fragment;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -11,6 +10,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,19 +19,18 @@ import androidx.fragment.app.DialogFragment;
 import com.example.maru.R;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class DateSelectorDialogFragment extends DialogFragment {
 
-    public interface OnDataPass{
-        public void onDataPass(Calendar calendar);
+    public interface OnDatePass {
+        public void onDateTimePass(Calendar calendar);
     }
 
-    private OnDataPass dataPasser;
+    private OnDatePass dataPasser;
 
-    private TextView mTitleTv;
     private DatePicker mDatePicker;
-    private SwitchMaterial mChangePickerTypeSw;
     private Button mSelectBtn;
 
     public DateSelectorDialogFragment(){
@@ -40,6 +39,10 @@ public class DateSelectorDialogFragment extends DialogFragment {
 
     public static DateSelectorDialogFragment newInstance(){
         return new DateSelectorDialogFragment();
+    }
+
+    public void setDatePasser(OnDatePass dataPasser){
+        this.dataPasser = dataPasser;
     }
 
     @Nullable
@@ -55,37 +58,24 @@ public class DateSelectorDialogFragment extends DialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mTitleTv = view.findViewById(R.id.dateFilterTitle);
         mDatePicker = view.findViewById(R.id.datefilterPicker);
-        mChangePickerTypeSw = view.findViewById(R.id.dateFilterTypeSw);
         mSelectBtn = view.findViewById(R.id.selectDateFilterBtn);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mSelectBtn.setOnClickListener(v -> SelectFilter());
-        mChangePickerTypeSw.setOnCheckedChangeListener(this::ChangeDatePicker);
+        mSelectBtn.setOnClickListener(v -> SelectDate());
     }
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        dataPasser = (OnDataPass) context;
-    }
-
-    private void SelectFilter() {
+    private void SelectDate() {
         int day = mDatePicker.getDayOfMonth();
         int month = mDatePicker.getMonth();
         int year = mDatePicker.getYear();
         Calendar calendar = Calendar.getInstance();
-        calendar.set(year,month,day);
-        dataPasser.onDataPass(calendar);
+        calendar.set(year, month, day);
+        dataPasser.onDateTimePass(calendar);
         dismiss();
-    }
-
-    private void ChangeDatePicker(CompoundButton buttonView, boolean isChecked) {
-
     }
 
 }
