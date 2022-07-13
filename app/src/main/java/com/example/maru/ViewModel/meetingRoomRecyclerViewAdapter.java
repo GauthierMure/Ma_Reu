@@ -1,5 +1,6 @@
 package com.example.maru.ViewModel;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ public class meetingRoomRecyclerViewAdapter extends RecyclerView.Adapter<meeting
 
     private List<MeetingRoom> mRooms;
     private onClickListener mListener;
+    private static int selectedHolderPosition = -1;
 
     public meetingRoomRecyclerViewAdapter (List<MeetingRoom> meetingRooms, onClickListener listener){
         mRooms = meetingRooms;
@@ -36,14 +38,21 @@ public class meetingRoomRecyclerViewAdapter extends RecyclerView.Adapter<meeting
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        holder.itemView.setOnClickListener(view -> {
+            selectedHolderPosition = holder.getAdapterPosition();
+            notifyDataSetChanged();
+            mListener.onClick(mRooms.get(position));
+        });
+        if (selectedHolderPosition == position){
+            holder.itemView.setBackgroundColor(holder.itemView.getResources().getColor(R.color.selectedItem));
+        }else{
+            holder.itemView.setBackgroundColor(holder.itemView.getResources().getColor(R.color.white));
+        }
         holder.setId(mRooms.get(position).getId());
         holder.getNameTv().setText(mRooms.get(position).getName());
         setColor(holder.getColorTv(),mRooms.get(position).getColor());
         holder.getCapacityTv().setText(String.valueOf(mRooms.get(position).getCapacity()));
-        holder.itemView.setOnClickListener(view -> {
-            mListener.onClick(mRooms.get(position));
-        });
+
     }
 
     @Override
@@ -63,9 +72,13 @@ public class meetingRoomRecyclerViewAdapter extends RecyclerView.Adapter<meeting
         private int id;
         private TextView colorTv, nameTv, capacityTv;
 
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            itemView.setOnClickListener(v -> {
+                selectedHolderPosition = getAdapterPosition();
+                notifyAll();
+            });
             colorTv = itemView.findViewById(R.id.roomColorTv);
             nameTv = itemView.findViewById(R.id.roomNameTv);
             capacityTv = itemView.findViewById(R.id.roomCapacityTv);

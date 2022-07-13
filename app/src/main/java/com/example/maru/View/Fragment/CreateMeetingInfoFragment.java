@@ -118,7 +118,6 @@ public class CreateMeetingInfoFragment extends Fragment implements DateSelectorD
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -197,9 +196,15 @@ public class CreateMeetingInfoFragment extends Fragment implements DateSelectorD
 
     private void Return(){
         FragmentManager fm = getActivity().getSupportFragmentManager();
-        MeetingInfoFragment frag = MeetingInfoFragment.newInstance(1);
-        int Tag = HomePageActivity.TAG_OTHER_FRAGMENT;
-        HomePageActivity.setFragment(fm, frag, Tag);
+        if (getActivity().getResources().getBoolean(R.bool.isTablet)) {
+            MeetingInfoFragment frag = MeetingInfoFragment.newInstance(1);
+            int Tag = HomePageActivity.TAG_OTHER_FRAGMENT;
+            HomePageActivity.setFragment(fm, frag, Tag);
+        }else{
+            ListMeetingFragment frag = ListMeetingFragment.newInstance();
+            int Tag = HomePageActivity.TAG_LIST_FRAGMENT;
+            HomePageActivity.setFragment(fm, frag, Tag);
+        }
     }
 
     private void addMail(){
@@ -210,7 +215,6 @@ public class CreateMeetingInfoFragment extends Fragment implements DateSelectorD
         }else{
             adapter.addMail(mAddMailEt.getText().toString());
         }
-
     }
 
     @Override

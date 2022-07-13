@@ -30,7 +30,8 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
 
     private final ApiServiceMeeting mApiserviceMeeting = DI.getMeetingApiService();
     private List<Meeting> mMeetings;
-    private static HomePageActivity mActivity;
+    private HomePageActivity mActivity;
+    private int selectedItemPosition = -1;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         private int id;
@@ -41,16 +42,6 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemView.setOnClickListener(v -> {
-                FragmentManager fm = mActivity.getSupportFragmentManager();
-                MeetingInfoFragment frag = MeetingInfoFragment.newInstance(id);
-                int Tag;
-                if (mActivity.getResources().getBoolean(R.bool.isTablet))
-                    Tag = HomePageActivity.TAG_OTHER_FRAGMENT;
-                else
-                    Tag = HomePageActivity.TAG_LIST_FRAGMENT;
-                HomePageActivity.setFragment(fm,frag,Tag);
-            });
             deleteBtn = itemView.findViewById(R.id.btnDeleteItem);
             titleTv = itemView.findViewById(R.id.tvInfoMeeting);
             participantsTv = itemView.findViewById(R.id.tvListParticipants);
@@ -102,12 +93,32 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if (parent.getResources().getBoolean(R.bool.isTablet))
+            selectedItemPosition = 0;
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_meeting_list,parent,false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MeetingListRecyclerViewAdapter.ViewHolder holder, int position) {
+
+        holder.itemView.setOnClickListener(v -> {
+            FragmentManager fm = mActivity.getSupportFragmentManager();
+            MeetingInfoFragment frag = MeetingInfoFragment.newInstance(holder.id);
+            int Tag;
+            if (mActivity.getResources().getBoolean(R.bool.isTablet))
+                Tag = HomePageActivity.TAG_OTHER_FRAGMENT;
+            else
+                Tag = HomePageActivity.TAG_LIST_FRAGMENT;
+            HomePageActivity.setFragment(fm,frag,Tag);
+            selectedItemPosition = holder.getAdapterPosition();
+            notifyDataSetChanged();
+        });
+        if (selectedItemPosition == position){
+            holder.itemView.setBackgroundColor(holder.itemView.getResources().getColor(R.color.selectedItem));
+        }else{
+            holder.itemView.setBackgroundColor(holder.itemView.getResources().getColor(R.color.white));
+        }
         holder.setId(mMeetings.get(position).getmId());
         holder.setColor(mMeetings.get(position).getColor());
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH'h'mm");

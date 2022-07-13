@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="appTheme">#4e92df</color>
+    <color name="selectedItem">#f9f9f9</color>
     
     <color name="rose">#edd9d0</color>
     <color name="vert">#C8EDB9</color>

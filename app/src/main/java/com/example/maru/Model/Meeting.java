@@ -1,5 +1,7 @@
 package com.example.maru.Model;
 
+import androidx.annotation.Nullable;
+
 import java.util.Calendar;
 import java.util.List;
 
@@ -111,5 +113,37 @@ public class Meeting {
 
     public void setFullDay(boolean fullDay) {
         isFullDay = fullDay;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+
+        final Meeting other = (Meeting) obj;
+
+
+        return this.mId == other.mId;
+    }
+
+    @Override
+    public String toString() {
+        return "Meeting{" +
+                "mId=" + mId +
+                ", mTitle='" + mTitle + '\'' +
+                ", mCreator='" + mCreator + '\'' +
+                ", mColor='" + mColor + '\'' +
+                ", mBeginingDate=" + mBeginingDate +
+                ", mEndingDate=" + mEndingDate +
+                ", mRoom=" + mRoom +
+                ", mTopic='" + mTopic + '\'' +
+                ", mParticipants=" + mParticipants +
+                ", isFullDay=" + isFullDay +
+                '}';
     }
 }

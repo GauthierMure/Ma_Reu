@@ -27,7 +27,7 @@ public class DummyMeetingGenerator {
             new Meeting(3, "Réunion C", "Chloé",getCalendar(2), getMeetingRoom(2), "sujet 3", participants)
     );
 
-    static List<Meeting> generateMeetings() {
+    public static List<Meeting> generateMeetings() {
         return new ArrayList<>(DUMMY_MEETINGS);
     }
 

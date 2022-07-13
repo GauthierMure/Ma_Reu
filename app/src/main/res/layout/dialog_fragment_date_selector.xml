@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:minWidth="300dp"
-    android:minHeight="400dp"
+    android:minHeight="250dp"
     android:background="@drawable/dialog_rounded_corner">
 
     <com.google.android.material.card.MaterialCardView

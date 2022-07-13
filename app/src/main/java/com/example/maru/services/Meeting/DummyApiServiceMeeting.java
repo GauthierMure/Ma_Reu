@@ -23,7 +23,6 @@ public class DummyApiServiceMeeting implements ApiServiceMeeting {
     @Override
     public void addMeeting(Meeting meeting) {
         mMeetings.add(meeting);
-        Log.i("meetingList", "size = "+mMeetings.size());
     }
 
     @Override
