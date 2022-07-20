@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.maru.DI.DI;
 import com.example.maru.Model.MeetingRoom;
 import com.example.maru.R;
 import com.example.maru.ViewModel.meetingRoomRecyclerViewAdapter;
@@ -38,6 +39,8 @@ public class customDialogFragment extends DialogFragment {
     private Button mSelectBtn;
 
     private MeetingRoom mRoom;
+
+    public customDialogFragment(){mRooms = DI.getMeetingRoomApiService().getMeetingRooms();}
 
     public customDialogFragment(List<MeetingRoom> meetingRooms){
         mRooms = meetingRooms;
