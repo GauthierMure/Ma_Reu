@@ -5,6 +5,7 @@ import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
@@ -40,41 +41,30 @@ import java.util.List;
 @RunWith(AndroidJUnit4.class)
 public class ApplicationInstrumentedTest {
 
-    private final int ITEMS_COUNT = 3;
+    private int ITEMS_COUNT;
 
     private ApiServiceMeeting apiServiceMeeting;
     private ApiServiceMeetingRoom apiServiceMeetingRoom;
-    private List<Meeting> meetingList;
-    private List<MeetingRoom> meetingRoomList;
-    private HomePageActivity mActivity;
-
-    @Rule
-    public ActivityScenarioRule<HomePageActivity> mActivityRule = new ActivityScenarioRule<>(HomePageActivity.class);
 
     @Before
     public void setup(){
         apiServiceMeeting = DI.getMeetingApiService();
-        apiServiceMeetingRoom = DI.getMeetingRoomApiService();
-        meetingList = apiServiceMeeting.getMeetings();
-        meetingRoomList = apiServiceMeetingRoom.getMeetingRooms();
+        apiServiceMeetingRoom = DI.getNewInstanceMeetingRoomApiService();
+        ITEMS_COUNT = apiServiceMeeting.getMeetings().size();
     }
 
     @Test
     public void MeetingList_ShouldNotBeEmpty(){
-        ActivityScenario<HomePageActivity> scenario = mActivityRule.getScenario();
+        ActivityScenario<HomePageActivity> scenario = ActivityScenario.launch(HomePageActivity.class);
         onView(withId(R.id.rvListMeeting)).check(matches(hasChildCount(ITEMS_COUNT)));
     }
 
     @Test
     public void MeetingList_deleteAction_shouldRemoveItem() {
-        ActivityScenario<HomePageActivity> scenario = mActivityRule.getScenario();
-        // Given : We remove the element at position 2
+        ActivityScenario<HomePageActivity> scenario = ActivityScenario.launch(HomePageActivity.class);
         onView(withId(R.id.rvListMeeting)).check(matches(hasChildCount(ITEMS_COUNT)));
-        // When perform a click on a delete icon
-        onView(withId(R.id.rvListMeeting))
-                .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
-        // Then : the number of element is 11
-        onView(withId(R.id.rvListMeeting)).check(matches(hasChildCount(ITEMS_COUNT-1)));
+        onView(withId(R.id.rvListMeeting)).perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
+        onView(withId(R.id.rvListMeeting)).check(matches(hasChildCount(ITEMS_COUNT-=1)));
     }
 
     //@Test
@@ -94,21 +84,26 @@ public class ApplicationInstrumentedTest {
 
     @Test
     public void MeetingList_ItemClic_ShouldDisplayMeetingInfo(){
-        ActivityScenario<HomePageActivity> scenario = mActivityRule.getScenario();
+        ActivityScenario<HomePageActivity> scenario = ActivityScenario.launch(HomePageActivity.class);
+        scenario.recreate();
         onView(withId(R.id.rvListMeeting)).perform(RecyclerViewActions.actionOnItemAtPosition(1,click()));
-        Meeting meeting = meetingList.get(1);
+        Meeting meeting = apiServiceMeeting.getMeetings().get(1);
         onView(withId(R.id.meetingInfoNameTv)).check(matches(withText(meeting.getTitle())));
+        onView(withId(R.id.iBtnAddMeetingReturn)).perform(click());
     }
 
     @Test
     public void MeetingList_addMeeting(){
-        ActivityScenario<HomePageActivity> scenario = mActivityRule.getScenario();
+        ActivityScenario<HomePageActivity> scenario = ActivityScenario.launch(HomePageActivity.class);
+
         onView(withId(R.id.rvListMeeting)).check(matches(hasChildCount(ITEMS_COUNT)));
 
         onView(withId(R.id.IBtnaddMeeting)).perform(click());
+        onView(withId(R.id.createMeetingFragment)).check(matches(isDisplayed()));
+        onView(withId(R.id.createMeetingBtn)).check(matches(isDisplayed()));
         onView(withId(R.id.createMeetingBtn)).perform(click());
 
-        onView(withId(R.id.rvListMeeting)).check(matches(hasChildCount(ITEMS_COUNT+1)));
+        onView(withId(R.id.rvListMeeting)).check(matches(hasChildCount(ITEMS_COUNT+=1)));
     }
 
 }

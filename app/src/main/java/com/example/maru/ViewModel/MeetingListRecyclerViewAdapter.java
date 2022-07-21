@@ -1,6 +1,5 @@
 package com.example.maru.ViewModel;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -19,7 +18,7 @@ import com.example.maru.DI.DI;
 import com.example.maru.Model.Meeting;
 import com.example.maru.R;
 import com.example.maru.View.Activity.HomePageActivity;
-import com.example.maru.View.Activity.MeetingInfoActivity;
+import com.example.maru.View.Fragment.ListMeetingFragment;
 import com.example.maru.View.Fragment.MeetingInfoFragment;
 import com.example.maru.services.Meeting.ApiServiceMeeting;
 
@@ -105,12 +104,13 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
         holder.itemView.setOnClickListener(v -> {
             FragmentManager fm = mActivity.getSupportFragmentManager();
             MeetingInfoFragment frag = MeetingInfoFragment.newInstance(holder.id);
-            int Tag;
+            int Container;
             if (mActivity.getResources().getBoolean(R.bool.isTablet))
-                Tag = HomePageActivity.TAG_OTHER_FRAGMENT;
+                Container = HomePageActivity.OTHER_FRAGMENT;
             else
-                Tag = HomePageActivity.TAG_LIST_FRAGMENT;
-            HomePageActivity.setFragment(fm,frag,Tag);
+                Container = HomePageActivity.LIST_FRAGMENT;
+            String Tag = HomePageActivity.FRAGMENT_INFO_MEETING;
+            HomePageActivity.setFragment(fm,frag, Container, Tag);
             selectedItemPosition = holder.getAdapterPosition();
             notifyDataSetChanged();
         });
@@ -136,6 +136,8 @@ public class MeetingListRecyclerViewAdapter extends RecyclerView.Adapter<Meeting
             mApiserviceMeeting.deleteMeeting(mMeetings.get(position).getmId());
             notifyItemRemoved(position);
             notifyItemRangeChanged(position,mMeetings.size());
+            ListMeetingFragment frag = (ListMeetingFragment) mActivity.getSupportFragmentManager().findFragmentByTag(HomePageActivity.FRAGMENT_LIST_MEETINGS);
+            frag.reInitList(mMeetings);
         });
     }
 

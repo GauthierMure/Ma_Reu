@@ -117,12 +117,13 @@ public class ListMeetingFragment extends Fragment implements customDialogFragmen
         mAddMeetingBtn.setOnClickListener(v -> {
             FragmentManager fm = getActivity().getSupportFragmentManager();
             CreateMeetingInfoFragment frag = CreateMeetingInfoFragment.newInstance();
-            int Tag;
+            int Container;
             if (getActivity().getResources().getBoolean(R.bool.isTablet))
-                Tag = HomePageActivity.TAG_OTHER_FRAGMENT;
+                Container = HomePageActivity.OTHER_FRAGMENT;
             else
-                Tag = HomePageActivity.TAG_LIST_FRAGMENT;
-            HomePageActivity.setFragment(fm,frag,Tag);
+                Container = HomePageActivity.LIST_FRAGMENT;
+            String Tag = HomePageActivity.FRAGMENT_CREATE_MEETING;
+            HomePageActivity.setFragment(fm,frag, Container, Tag);
 
         });
     }
@@ -141,6 +142,10 @@ public class ListMeetingFragment extends Fragment implements customDialogFragmen
         DateSelectorDialogFragment dialogFragment = DateSelectorDialogFragment.newInstance();
         dialogFragment.setDatePasser(ListMeetingFragment.this);
         dialogFragment.show(fm,null);
+    }
+
+    public void reInitList(List<Meeting> meetings){
+        initFiltredList(meetings);
     }
 
     @Override

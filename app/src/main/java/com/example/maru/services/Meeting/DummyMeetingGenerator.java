@@ -50,9 +50,9 @@ public class DummyMeetingGenerator {
         else if (id == 1)
             room = new MeetingRoom(1,"Meeting Room 2","#edd9d0",2,15);
         else if (id == 2)
-            room = new MeetingRoom(3,"Meeting Room 3","#B9BBED",3,20);
+            room = new MeetingRoom(2,"Meeting Room 3","#B9BBED",3,20);
         else
-            room = new MeetingRoom(4,"Meeting Room 4","#C8EDB9",2,7);
+            room = new MeetingRoom(3,"Meeting Room 4","#C8EDB9",2,7);
         return room;
     }
 }

@@ -16,5 +16,5 @@ public class DI {
 
     public static ApiServiceMeeting getNewInstanceMeetingApiService(){return new DummyApiServiceMeeting();}
 
-    public static ApiServiceMeetingRoom getNewInstanceMeetinRoomApiService(){return new DummyApiServiceMeetingRoom();}
+    public static ApiServiceMeetingRoom getNewInstanceMeetingRoomApiService(){return new DummyApiServiceMeetingRoom();}
 }

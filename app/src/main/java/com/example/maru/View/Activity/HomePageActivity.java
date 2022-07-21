@@ -9,17 +9,24 @@ import android.os.Bundle;
 
 import android.widget.FrameLayout;
 
+import com.example.maru.DI.DI;
 import com.example.maru.R;
 import com.example.maru.View.Fragment.ListMeetingFragment;
 import com.example.maru.View.Fragment.MeetingInfoFragment;
+import com.example.maru.services.Meeting.ApiServiceMeeting;
+import com.example.maru.services.MeetingRoom.ApiServiceMeetingRoom;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomePageActivity extends AppCompatActivity {
 
-    public static final int TAG_LIST_FRAGMENT = 0;
-    public static final int TAG_OTHER_FRAGMENT = 1;
+    public static final int LIST_FRAGMENT = 0;
+    public static final int OTHER_FRAGMENT = 1;
+
+    public static final String FRAGMENT_LIST_MEETINGS = "list_meetings";
+    public static final String FRAGMENT_CREATE_MEETING = "create_meeting";
+    public static final String FRAGMENT_INFO_MEETING = "info_meeting";
 
     private static List<FrameLayout> frameLayouts = new ArrayList<>();
 
@@ -43,8 +50,8 @@ public class HomePageActivity extends AppCompatActivity {
             FragmentManager fm = getSupportFragmentManager();
             ListMeetingFragment ListFragment = ListMeetingFragment.newInstance();
             MeetingInfoFragment meetingInfoFragment = MeetingInfoFragment.newInstance(1);
-            setFragment(fm, ListFragment,TAG_LIST_FRAGMENT);
-            setFragment(fm, meetingInfoFragment,TAG_OTHER_FRAGMENT);
+            setFragment(fm, ListFragment, LIST_FRAGMENT,FRAGMENT_LIST_MEETINGS);
+            setFragment(fm, meetingInfoFragment, OTHER_FRAGMENT,FRAGMENT_INFO_MEETING);
 
 
         }else {
@@ -53,15 +60,15 @@ public class HomePageActivity extends AppCompatActivity {
 
             FragmentManager fm = getSupportFragmentManager();
             ListMeetingFragment ListFragment = ListMeetingFragment.newInstance();
-            setFragment(fm, ListFragment,TAG_LIST_FRAGMENT);
+            setFragment(fm, ListFragment, LIST_FRAGMENT,FRAGMENT_LIST_MEETINGS);
         }
     }
 
-    public static void setFragment(FragmentManager fm, Fragment fragment, int tag){
-        if (tag == TAG_LIST_FRAGMENT)
-            fm.beginTransaction().replace(frameLayouts.get(0).getId(),fragment,null).commit();
-        else if (tag == TAG_OTHER_FRAGMENT)
-            fm.beginTransaction().replace(frameLayouts.get(1).getId(),fragment,null).commit();
+    public static void setFragment(FragmentManager fm, Fragment fragment, int Container, String Tag){
+        if (Container == LIST_FRAGMENT)
+            fm.beginTransaction().replace(frameLayouts.get(0).getId(),fragment,Tag).commit();
+        else if (Container == OTHER_FRAGMENT)
+            fm.beginTransaction().replace(frameLayouts.get(1).getId(),fragment,Tag).commit();
 
     }
 }

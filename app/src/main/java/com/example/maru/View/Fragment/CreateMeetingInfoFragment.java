@@ -1,13 +1,9 @@
 package com.example.maru.View.Fragment;
 
-import android.app.ActionBar;
-import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -182,15 +178,18 @@ public class CreateMeetingInfoFragment extends Fragment implements DateSelectorD
         FragmentManager fm = getActivity().getSupportFragmentManager();
         if (getActivity().getResources().getBoolean(R.bool.isTablet)){
             ListMeetingFragment listFrag = ListMeetingFragment.newInstance();
-            int Tag = HomePageActivity.TAG_LIST_FRAGMENT;
-            HomePageActivity.setFragment(fm,listFrag,Tag);
+            int Container = HomePageActivity.LIST_FRAGMENT;
+            String Tag = HomePageActivity.FRAGMENT_LIST_MEETINGS;
+            HomePageActivity.setFragment(fm,listFrag, Container, Tag);
             MeetingInfoFragment frag = MeetingInfoFragment.newInstance(mMeeting.getmId());
-            Tag = HomePageActivity.TAG_OTHER_FRAGMENT;
-            HomePageActivity.setFragment(fm,frag,Tag);
+            Container = HomePageActivity.OTHER_FRAGMENT;
+            Tag = HomePageActivity.FRAGMENT_INFO_MEETING;
+            HomePageActivity.setFragment(fm,frag, Container, Tag);
         }else{
             ListMeetingFragment frag = ListMeetingFragment.newInstance();
-            int Tag = HomePageActivity.TAG_LIST_FRAGMENT;
-            HomePageActivity.setFragment(fm,frag,Tag);
+            int Container = HomePageActivity.LIST_FRAGMENT;
+            String Tag = HomePageActivity.FRAGMENT_LIST_MEETINGS;
+            HomePageActivity.setFragment(fm,frag, Container, Tag);
         }
     }
 
@@ -198,12 +197,14 @@ public class CreateMeetingInfoFragment extends Fragment implements DateSelectorD
         FragmentManager fm = getActivity().getSupportFragmentManager();
         if (getActivity().getResources().getBoolean(R.bool.isTablet)) {
             MeetingInfoFragment frag = MeetingInfoFragment.newInstance(1);
-            int Tag = HomePageActivity.TAG_OTHER_FRAGMENT;
-            HomePageActivity.setFragment(fm, frag, Tag);
+            int Container = HomePageActivity.OTHER_FRAGMENT;
+            String Tag = HomePageActivity.FRAGMENT_INFO_MEETING;
+            HomePageActivity.setFragment(fm, frag, Container, Tag);
         }else{
             ListMeetingFragment frag = ListMeetingFragment.newInstance();
-            int Tag = HomePageActivity.TAG_LIST_FRAGMENT;
-            HomePageActivity.setFragment(fm, frag, Tag);
+            int Container = HomePageActivity.LIST_FRAGMENT;
+            String Tag = HomePageActivity.FRAGMENT_LIST_MEETINGS;
+            HomePageActivity.setFragment(fm, frag, Container, Tag);
         }
     }
 

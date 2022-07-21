@@ -1,6 +1,5 @@
 package com.example.maru;
 
-import org.hamcrest.collection.IsIterableContainingInAnyOrder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,8 +23,8 @@ public class ServicesTest {
 
     @Before
     public void setup(){
-        meetingService = DI.getMeetingApiService();
-        meetingRoomService = DI.getMeetingRoomApiService();
+        meetingService = DI.getNewInstanceMeetingApiService();
+        meetingRoomService = DI.getNewInstanceMeetingRoomApiService();
     }
 
     @Test
@@ -35,7 +34,7 @@ public class ServicesTest {
 
         if (meetings.size() == expectedMeetings.size()){
             for (int i = 0; i < meetings.size(); i++){
-                assertEquals(expectedMeetings.get(i).getmId(),meetings.get(i).getmId()-1);
+                assertEquals(expectedMeetings.get(i).getmId(),meetings.get(i).getmId());
             }
         }
     }
@@ -79,7 +78,7 @@ public class ServicesTest {
         List<MeetingRoom> expectedMeetingRooms = DummyMeetingRoomGenerator.generateMeetingRoom();
         if (meetingRooms.size() == expectedMeetingRooms.size()){
             for(int i = 0; i < meetingRooms.size(); i++){
-                assertEquals(expectedMeetingRooms.get(i).getId(),meetingRooms.get(i).getId()-1);
+                assertEquals(expectedMeetingRooms.get(i).getId(),meetingRooms.get(i).getId());
             }
         }
     }

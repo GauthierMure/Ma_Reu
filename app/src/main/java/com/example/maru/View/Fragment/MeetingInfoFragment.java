@@ -131,8 +131,9 @@ public class MeetingInfoFragment extends Fragment {
             mReturnBtn.setOnClickListener(v -> {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 ListMeetingFragment frag = ListMeetingFragment.newInstance();
-                int Tag = HomePageActivity.TAG_LIST_FRAGMENT;
-                HomePageActivity.setFragment(fm,frag,Tag);
+                int Container = HomePageActivity.LIST_FRAGMENT;
+                String Tag = HomePageActivity.FRAGMENT_LIST_MEETINGS;
+                HomePageActivity.setFragment(fm,frag,Container ,Tag);
             });
 
     }
